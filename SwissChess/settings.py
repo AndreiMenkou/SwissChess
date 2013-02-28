@@ -1,5 +1,6 @@
 # Django settings for SwissChess project.
 import os
+from SwissChess import main
 
 BASEDIR = os.path.abspath(os.path.dirname(__file__))
 
@@ -126,6 +127,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'SwissChess.main'
 )
 
 # A sample logging configuration. The only tangible logging
