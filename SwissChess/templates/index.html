@@ -1,13 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-    {% if user.is_authenticated %}
-        <h1>User is authenticated :-)</h1>
-    {% else %}
-        <h1>User isn't authenticated :-(</h1>
-    {% endif %}
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="span6">
+            <h1 class="inline list-header">Expenses</h1>
+                <span class="add-list-button">
+                    <a class="btn btn-success" href="/"><i class="icon-plus-sign icon-white"></i> Create New</a>
+                </span>
+        </div>
+    </div>
+    <div class="row" style="padding-top: 100px">
+        <div class="span7">
+            <h1 class="inline list-header">
+                {% if user.is_authenticated %}
+                    <h1>User authenticated -- OK!</h1>
+                {% else %}
+                    <h1>User isn't authenticated -- Bad!</h1>
+                {% endif %}
+            </h1>
+        </div>
+    </div>
+{% endblock %}
