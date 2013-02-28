@@ -1,4 +1,7 @@
 # Django settings for SwissChess project.
+import os
+
+BASEDIR = os.path.abspath(os.path.dirname(__file__))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -52,21 +55,27 @@ MEDIA_ROOT = ''
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 MEDIA_URL = ''
 
+WEB_DOMAIN = '//swiss-chess.com/' # <- domain where to host project
+try:
+    from settings_local import WEB_DOMAIN
+except ImportError:
+    pass
+
+MEDIA_URL = WEB_DOMAIN + 'upload/'
+
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT =  os.path.join(BASEDIR, 'collected_static')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
+STATIC_URL = WEB_DOMAIN + 'static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(BASEDIR, 'static'),
 )
 
 # List of finder classes that know how to find static files in
@@ -103,9 +112,7 @@ ROOT_URLCONF = 'SwissChess.urls'
 WSGI_APPLICATION = 'SwissChess.wsgi.application'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(BASEDIR, 'templates'),
 )
 
 INSTALLED_APPS = (
@@ -149,3 +156,11 @@ LOGGING = {
         },
     }
 }
+
+
+##################################
+#     Local settings block       #
+##################################
+
+if os.path.isfile(os.path.join(BASEDIR, 'settings_local.py')):
+    from settings_local import *

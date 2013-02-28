@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+        <h1>User is authenticated :-)</h1>
+    {% else %}
+        <h1>User isn't authenticated :-(</h1>
+    {% endif %}
+</body>
+</html>
