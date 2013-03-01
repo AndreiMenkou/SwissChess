@@ -1,6 +1,5 @@
 {% for field in form %}
-    <div class="fieldWrapper">
-        {{ field.errors }}
-        {{ field.label_tag }}: {{ field }}
-    </div>
+    {{ field.label_tag }}: {{ field }}
+    <span class="help-block">{{ field.help_text }}</span>
 {% endfor %}
+<input class="btn btn-primary" type="submit" value="Submit" />

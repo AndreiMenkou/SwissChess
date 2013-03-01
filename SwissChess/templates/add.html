@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <form id="add">
-        {% csrf_token %}
-        {% include 'form_snippet.html' %}
-    <input type="submit" value="Save"/>
-    </form>
+    <div class="row">
+        <div class="span6">
+            <form id="form-wrapper">
+                {% csrf_token %}
+                {% include 'form_snippet.html' %}
+            </form>
+        </div>
+    </div>
 {% endblock %}
