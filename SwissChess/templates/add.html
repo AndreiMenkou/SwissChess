@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form id="add">
+        {% csrf_token %}
+        {% include 'form_snippet.html' %}
+    <input type="submit" value="Save"/>
+    </form>
+{% endblock %}

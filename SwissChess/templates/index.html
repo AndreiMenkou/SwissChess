@@ -3,10 +3,34 @@
 {% block content %}
     <div class="row">
         <div class="span6">
-            <h1 class="inline list-header">Expenses</h1>
-                <span class="add-list-button">
-                    <a class="btn btn-success" href="/"><i class="icon-plus-sign icon-white"></i> Create New</a>
+            <h1 class="inline list-header">Swiss-system chess</h1>
+
+                {% if user.is_authenticated %}
+                    <span class="add-list-button">
+                    <a class="btn btn-success" href="{% url main.views.add_tournament %}">
+                        <i class="icon-plus-sign icon-white"></i>
+                        Create Tournament
+                    </a>
                 </span>
+                    <span class="add-list-button">
+                    <a class="btn btn-success" href="{% url main.views.add_player %}">
+                        <i class="icon-plus-sign icon-white"></i>
+                        Create Player
+                    </a>
+                </span>
+                    <span class="add-list-button">
+                    <a class="btn btn-success" href="{% url main.views.add_tour %}">
+                        <i class="icon-plus-sign icon-white"></i>
+                        Create tour
+                    </a>
+                </span>
+                    <span class="add-list-button">
+                    <a class="btn btn-success" href="{% url main.views.add_game %}">
+                        <i class="icon-plus-sign icon-white"></i>
+                        Create game
+                    </a>
+                </span>
+                {% endif %}
         </div>
     </div>
     <div class="row" style="padding-top: 100px">

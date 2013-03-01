@@ -4,9 +4,13 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns('SwissChess.main.views',
     # Examples:
-    url(r'^$', 'SwissChess.main.views.index'),
+    url(r'^$', 'index'),
+    url(r'^add/game$', 'add_game'),
+    url(r'^add/player$', 'add_player'),
+    url(r'^add/tour$', 'add_tour'),
+    url(r'^add/tournament$', 'add_tournament'),
     # url(r'^SwissChess/', include('SwissChess.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
