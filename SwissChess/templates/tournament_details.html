@@ -50,9 +50,11 @@
         {% elif tours %}
             <div class="pagination">
             <ul>
+            {% with cur_tour=tour %}
             {% for tour in tours %}
-                <li><a href="?tour={{ tour.number }}">Tour {{ tour.number }}</a></li>
+                <li{% if cur_tour.id == tour.id %} class="active"{% endif %}><a href="?tour={{ tour.number }}">Tour {{ tour.number }}</a></li>
             {% endfor %}
+            {% endwith %}
             </ul>
             </div>
             <h2>Tour {{ tour.number }} games</h2>
