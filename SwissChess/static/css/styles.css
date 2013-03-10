@@ -1,3 +1,54 @@
 body {
     padding-top: 60px;
 }
+
+#form-wrapper {
+    padding-left: 100px;
+}
+
+div.progress {
+    margin-bottom: auto;
+}
+
+.table-nonfluid {
+    width: auto;
+}
+
+tr.winner {
+    font-weight: bold;
+}
+
+.add-list-button {
+    margin-left: 20px;
+    position: relative;
+    bottom: 13px;
+}
+
+.list-header {
+    position: relative;
+    bottom: 5px;
+}
+
+.inline {
+    display: inline;
+}
+
+td.winner {
+    background-color: #dff0d8;
+    font-style: italic;
+}
+
+td.tie {
+    background-color: #fcf8e3;
+    font-style: italic;
+}
+
+.help-block {
+    color: #999;
+    font-size: smaller;
+}
+
+.error-block {
+    color: #b94a48;
+
+}

@@ -42,8 +42,10 @@
                 <a class="brand" href="/">Swiss Chess Tournament App</a>
                 <div class="nav-collapse collapse">
                     <ul class="nav">
+                        {% block navigation %}
                         <li class="active"><a href="/">Home</a></li>
-                        <li><a href="/admin">Admin</a></li>
+                        <li><a href="/players">Players</a></li>
+                        {% endblock %}
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>

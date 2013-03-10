@@ -1,0 +1,17 @@
+<table id="tournaments" class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Tournament name</th>
+        <th>Progress</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for tournament in tournaments %}
+        <tr>
+            <td><a href="/tournaments/{{ tournament.id }}">{{ tournament.name }}</a></td>
+            <td><div class="progress"> <div class="bar" style="width: {{ tournament.progress }}%;"></div>
+            </div></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,28 @@
+<table class="table table-bordered table-condensed">
+    <thead>
+    <tr>
+        <th>Black player</th>
+        <th>White player</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for game in games %}
+        <tr>
+        {% if game.winner %}
+            <td
+                {% if game.winner == game.black_player.id %} class="winner"
+                {% elif game.winner == -1 %} class="tie"{% endif %}>
+                {{ game.black_player }}
+            </td>
+            <td
+                {% if game.winner == game.white_player.id %} class="winner"
+                {% elif game.winner == -1 %} class="tie"{% endif %}>
+                {{ game.white_player }}</td>
+        {% else %}
+            <td>{{ game.black_player }}</td>
+            <td>{{ game.white_player }}</td>
+        {% endif %}
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

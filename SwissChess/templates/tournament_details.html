@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+<div class="span7">
+    {% if user.is_authenticated and not tournament.is_finished %}
+        {% if tournament.created %}
+            {% if not tournament.last_tour or tournament.last_tour.finished %}
+                <a class="btn btn-success" href="{% url create_tour tournament.id %}">
+                    <i class="icon-plus-sign icon-white"></i>
+                    Create new tour
+                </a>
+            {% endif %}
+        {% else %}
+            {% if tournament.players.count|divisibleby:"2" %}
+                <a class="btn btn-success" href="{% url main.views.create_tournament tournament.id %}">
+            {% else %}
+                <a class="btn btn-success disabled">
+            {% endif %}
+                <i class="icon-ok-sign icon-white"></i>
+                Create tournament
+            </a>
+            <a class="btn btn-success" href="{% url main.views.add_players_to_tournament tournament.id %}">
+                <i class="icon-plus-sign icon-white"></i>
+                Add existing players
+            </a>
+        {% endif %}
+    {% endif %}
+    <h1>Tournament <em>'{{ tournament.name }}'</em> details</h1>
+    {% if tournament.created %}
+        Progress: {{ tournament.progress|floatformat }} %
+        <div class="progress">
+            <div class="bar" style="width: {{ tournament.progress|floatformat }}%;"></div>
+        </div>
+    {% endif %}
+
+{% if players %}
+
+    {% if tournament.is_finished %}
+    <h2>Final results</h2>
+    {% include "includes/results_table.html" %}
+
+    {% else %}
+        <h2>Participants</h2>
+        {% include "includes/players_table.html" %}
+        {% if not tournament.created %}
+            <span class="help-block">
+            There must be even number of players in Tournament for create it
+            </span>
+        {% elif tours %}
+            <div class="pagination">
+            <ul>
+            {% for tour in tours %}
+                <li><a href="?tour={{ tour.number }}">Tour {{ tour.number }}</a></li>
+            {% endfor %}
+            </ul>
+            </div>
+            <h2>Tour {{ tour.number }} games</h2>
+            {% include "includes/games_table.html" %}
+            {% if not tour.finished %}
+                <a class="btn btn-success" href="{% url main.views.edit_tour tour.id %}">
+                    <i class="icon-edit icon-white"></i>
+                    Edit games results
+                </a>
+            {% endif %}
+         {% endif %}
+
+    {% endif %}
+
+    {% else %}
+There is no participants yet!
+{% endif %}
+        </div>
+    </div>
+
+{% endblock %}

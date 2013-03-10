@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Tour {{ tour.number }} of {{ tour.tournament.name }}</h1>
+<div class="row">
+    <div class="span6">
+        <form method="post" action="">
+            {% csrf_token %}
+            {{ games_formset.management_form }}
+        <table class="table table-bordered table-censored">
+
+            <thead>
+            <tr>
+                <th>Black player</th>
+                <th>White player</th>
+                <th>Result</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for form in games_formset %}
+                {{ form.id }}
+                <tr>
+                <td>{{ form.instance.black_player }}</td>
+                <td>{{ form.instance.white_player }}</td>
+                <td>{% if not form.instance.result %}{{ form.result }}{% else %}{{ form.instance.result }}{% endif %} </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <input type="submit" value="Save results" class="btn btn-primary"/>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th> #</th>
+        <th>Player</th>
+        <th>Points</th>
+        <th>Rating</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for player in players %}
+        <tr{% if forloop.counter <= 3 %} class="success" {% endif %}>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ player.full_name }}</td>
+        <td>{{ player.points }}</td>
+        <td>{{ player.rating }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

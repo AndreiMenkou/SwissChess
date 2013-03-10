@@ -1,5 +1,16 @@
+{% if form.non_field_errors %}
+    <div class="alert alert-error">
+        {% for non_field_error in form.non_field_errors %}
+            <p>{{ non_field_error }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
 {% for field in form %}
-    {{ field.label_tag }}: {{ field }}
+    {{ field.label_tag }}
+    {{ field }}
+    {% if field.errors %}
+        <span class="error-block">{{ field.errors|first }}</span>
+    {%  endif %}
     <span class="help-block">{{ field.help_text }}</span>
 {% endfor %}
 <input class="btn btn-primary" type="submit" value="Submit" />

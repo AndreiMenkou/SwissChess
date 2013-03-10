@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block navigation %}
+    <li><a href="/">Home</a></li>
+    <li class="active"><a href="/players">Players</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="span6">
+        <a class="btn btn-success" href="{% url main.views.add_player %}">
+            <i class="icon-plus-sign icon-white"></i>
+            Create Player
+        </a>
+
+        <h1>All players</h1>
+
+        {% include "includes/players_table.html"%}
+        {% include "includes/paginator.html" with paginated_objects=players %}
+    </div>
+</div>
+{% endblock %}

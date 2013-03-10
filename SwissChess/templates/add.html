@@ -3,7 +3,7 @@
 {% block content %}
     <div class="row">
         <div class="span6">
-            <form id="form-wrapper">
+            <form id="form-wrapper" method="post">
                 {% csrf_token %}
                 {% include 'form_snippet.html' %}
             </form>

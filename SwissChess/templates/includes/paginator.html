@@ -1,0 +1,19 @@
+{% if paginated_objects.paginator.num_pages > 1 %}
+    <div class="pagination pagination-centered">
+        <ul>
+            <li><a href="?page=1">&larr;</a></li>
+            {% for page in paginated_objects.paginator.page_range %}
+                {%  if page == paginated_objects.number|add:"-5" %}
+                    <li class="disabled"><a href="#">...</a></li>
+                {% endif %}
+                {% if page < paginated_objects.number|add:"5" and page > paginated_objects.number|add:"-5" %}
+                    <li {% if page == paginated_objects.number %}class="active"{% endif %}><a href="?page={{ page }}" >{{ page }}</a></li>
+                {% endif %}
+                {%  if page == paginated_objects.number|add:"5" %}
+                    <li class="disabled"><a href="#">...</a></li>
+                {% endif %}
+            {% endfor %}
+            <li><a href="?page={{ paginated_objects.paginator.num_pages }}">&rarr;</a></li>
+        </ul>
+    </div>
+{% endif %}

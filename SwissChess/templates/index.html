@@ -3,45 +3,19 @@
 {% block content %}
     <div class="row">
         <div class="span6">
-            <h1 class="inline list-header">Swiss-system chess</h1>
-
+            {% if tournaments %}
                 {% if user.is_authenticated %}
-                    <span class="add-list-button">
                     <a class="btn btn-success" href="{% url main.views.add_tournament %}">
                         <i class="icon-plus-sign icon-white"></i>
                         Create Tournament
                     </a>
-                </span>
-                    <span class="add-list-button">
-                    <a class="btn btn-success" href="{% url main.views.add_player %}">
-                        <i class="icon-plus-sign icon-white"></i>
-                        Create Player
-                    </a>
-                </span>
-                    <span class="add-list-button">
-                    <a class="btn btn-success" href="{% url main.views.add_tour %}">
-                        <i class="icon-plus-sign icon-white"></i>
-                        Create tour
-                    </a>
-                </span>
-                    <span class="add-list-button">
-                    <a class="btn btn-success" href="{% url main.views.add_game %}">
-                        <i class="icon-plus-sign icon-white"></i>
-                        Create game
-                    </a>
-                </span>
                 {% endif %}
-        </div>
-    </div>
-    <div class="row" style="padding-top: 100px">
-        <div class="span7">
-            <h1 class="inline list-header">
-                {% if user.is_authenticated %}
-                    <h1>User authenticated -- OK!</h1>
-                {% else %}
-                    <h1>User isn't authenticated -- Bad!</h1>
-                {% endif %}
-            </h1>
+            <h1>Tournaments</h1>
+            {% include "includes/tournaments_table.html" %}
+            {% include "includes/paginator.html" with paginated_objects=tournaments %}
+            {% else %}
+                <p>There are no created tournaments yet!</p>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

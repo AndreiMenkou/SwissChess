@@ -1,0 +1,23 @@
+<h2>{{ table_title }}</h2>
+<table class="table table-bordered table-condensed">
+    <thead>
+    <tr>
+        {% if enumerate %}<th> #</th>{% endif %}
+        <th>Player</th>
+        {% if players.0.points >= 0 %}
+            <th>Points</th>
+        {% endif %}
+        <th>Rating</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for player in players %}
+        <tr>
+            {% if enumerate %}<td>{{ forloop.counter }}</td>{% endif %}
+            <td>{{ player.full_name }}</td>
+            {% if player.points >= 0 %}<td>{{ player.points }}</td>{% endif %}
+            <td>{{ player.rating }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
