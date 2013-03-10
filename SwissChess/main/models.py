@@ -9,7 +9,7 @@ WHITE_COLOR = 'white'
 class Player(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    rating = models.IntegerField(help_text='ELO rating')
+    rating = models.IntegerField(min_value=1, max_value=3000, help_text='ELO rating, must be positive integer < 3000')
 
     class Meta:
         ordering = ('first_name', 'last_name')
@@ -56,7 +56,7 @@ class Tournament(models.Model):
     def __unicode__(self):
         return 'Tournament ' + self.name
 
-    def get_progress(self):
+    def calc_progress(self):
         full_tours_needed = get_numbser_of_tours(self.players.count())
         full_games_needed = full_tours_needed * self.players.count() / 2
         played_games = 0
@@ -70,7 +70,7 @@ class Tournament(models.Model):
         return self.progress == 100.0
 
     def update_progress(self):
-        self.progress = self.get_progress()
+        self.progress = self.calc_progress()
         self.save()
 
     @property
@@ -89,8 +89,8 @@ class Tournament(models.Model):
     @property
     def results(self):
         memberships = [membership for membership in self.membership_set.all()]
-        memberships.sort(cmp=lambda x,y: cmp(x.points, y.points)
-        if abs(x.points - y.points) > 0.1 else cmp(x.buchholz_coeff, y.buchholz_coeff), reverse=True)
+        memberships.sort(cmp=lambda x, y: cmp(x.points, y.points)
+            if abs(x.points - y.points) > 0.1 else cmp(x.buchholz_coeff, y.buchholz_coeff), reverse=True)
         players = []
         for membership in memberships:
             player = membership.player
@@ -98,7 +98,6 @@ class Tournament(models.Model):
             players.append(player)
 
         return players
-
 
 
 class Membership(models.Model):
@@ -150,7 +149,6 @@ class Game(models.Model):
     )
     black_player = models.ForeignKey(Player, related_name='black player')
     white_player = models.ForeignKey(Player, related_name='white player')
-    # tournament = models.ForeignKey(Tournament)
     tour = models.ForeignKey(Tour)
     result = models.CharField(max_length=2, choices=GAME_RESULT_TYPES, blank=True, null=True)
 

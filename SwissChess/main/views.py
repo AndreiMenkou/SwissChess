@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from django.db import transaction
 from django.shortcuts import render, redirect, get_object_or_404
-from SwissChess.main.forms import GameForm, TournamentForm, PlayerForm, PlayerToTournamentForm, GameFormSet
+from SwissChess.main.forms import TournamentForm, PlayerForm, PlayerToTournamentForm, GameFormSet
 from SwissChess.main.models import Tournament, Player, Membership, Tour
 from SwissChess.main.swiss import populate_tour_games
 
