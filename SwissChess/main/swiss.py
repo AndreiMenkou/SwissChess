@@ -101,22 +101,14 @@ class SwissHelper(object):
             Game.objects.create(black_player=player1, white_player=player2, tour=self.tour)
         else:
             last_colors1 = [_tour.get_player_color(player1) for _tour in tours]
-            print "Last colors of", player1, last_colors1
             last_colors2 = [_tour.get_player_color(player2) for _tour in tours]
-            print "Last colors of", player2, last_colors2
             if last_colors1[0] != last_colors2[0]:  # last colors differ -> select different colors
-                print 1
                 if last_colors1[0] == BLACK_COLOR:
-                    print 2
                     Game.objects.create(black_player=player2, white_player=player1, tour=self.tour)
                 else:
-                    print 3
                     Game.objects.create(black_player=player1, white_player=player2, tour=self.tour)
             else:
-                print 4
                 if last_colors1.count(BLACK_COLOR) > last_colors2.count(BLACK_COLOR):
-                    print 5
                     Game.objects.create(black_player=player2, white_player=player1, tour=self.tour)
                 else:
-                    print 6
                     Game.objects.create(black_player=player1, white_player=player2, tour=self.tour)
