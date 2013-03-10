@@ -12,7 +12,7 @@
                 </a>
             {% endif %}
         {% else %}
-            {% if tournament.players.count|divisibleby:"2" %}
+            {% if tournament.players.count|divisibleby:"2" and tournament.players.count > 3 %}
                 <a class="btn btn-success" href="{% url main.views.create_tournament tournament.id %}">
             {% else %}
                 <a class="btn btn-success disabled">
@@ -45,7 +45,7 @@
         {% include "includes/players_table.html" %}
         {% if not tournament.created %}
             <span class="help-block">
-            There must be even number of players in Tournament for create it
+            There must be even number of players in Tournament for create it (and more than 3)
             </span>
         {% elif tours %}
             <div class="pagination">
@@ -57,7 +57,7 @@
             </div>
             <h2>Tour {{ tour.number }} games</h2>
             {% include "includes/games_table.html" %}
-            {% if not tour.finished %}
+            {% if not tour.finished and user.is_authenticated %}
                 <a class="btn btn-success" href="{% url main.views.edit_tour tour.id %}">
                     <i class="icon-edit icon-white"></i>
                     Edit games results

@@ -1,22 +1,7 @@
-from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.core.exceptions import ValidationError
 import django.forms as forms
 from django.forms.models import modelformset_factory
-from django.forms.widgets import TextInput
 from SwissChess.main.models import Game, Tournament, Tour, Player
-
-
-class GameForm(forms.ModelForm):
-    class Meta:
-        model = Game
-
-    def clean(self):
-        super(GameForm, self).clean()
-        data = self.cleaned_data
-        if data.get('black_player') == data.get('white_player'):
-            raise ValidationError('Players in game must be distinct')
-
-        return data
 
 
 class TournamentForm(forms.ModelForm):
@@ -25,14 +10,16 @@ class TournamentForm(forms.ModelForm):
         fields = ['name', 'players']
 
 
-class TourForm(forms.ModelForm):
-    class Meta:
-        model = Tour
-
-
 class PlayerForm(forms.ModelForm):
     class Meta:
         model = Player
+
+    def clean_rating(self):
+        rating = self.cleaned_data['rating']
+        if rating < 0 or rating > 3000:
+            raise ValidationError('Must be in range 0..3000')
+
+        return rating
 
 
 class PlayerToTournamentForm(forms.Form):

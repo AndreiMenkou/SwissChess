@@ -9,7 +9,7 @@ WHITE_COLOR = 'white'
 class Player(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    rating = models.IntegerField(min_value=1, max_value=3000, help_text='ELO rating, must be positive integer < 3000')
+    rating = models.IntegerField(help_text='ELO rating, must be positive integer < 3000')
 
     class Meta:
         ordering = ('first_name', 'last_name')

@@ -58,7 +58,7 @@ MEDIA_ROOT = ''
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 MEDIA_URL = ''
 
-WEB_DOMAIN = '//swiss-chess.com/' # <- domain where to host project
+WEB_DOMAIN = '//127.0.0.1:8000/' # <- domain where to host project
 try:
     from settings_local import WEB_DOMAIN
 except ImportError:
